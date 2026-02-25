@@ -369,7 +369,39 @@
       .profiles { grid-template-columns: 1fr; }
       .profile { padding: 60px 24px; }
     }
-  </style>
+  .footer-tooltip-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+.footer-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #222;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  line-height: 1.8;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+.footer-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #222;
+}
+.footer-tooltip-wrap:hover .footer-tooltip {
+  display: block;
+  animation: fadeUp 0.2s ease;
+}</style>
 </head>
 <body>
 
