@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lê Đức Phong & Nguyễn Ngọc Quỳnh Nhi</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👫</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -159,10 +160,7 @@
       background: linear-gradient(160deg, #fde8f3 0%, #f5b7d8 60%, #c86e9f 100%);
     }
 
-    .avatar-svg {
-      width: 220px;
-      height: 280px;
-    }
+    .avatar-svg { width: 220px; height: 280px; }
 
     .photo-corner {
       position: absolute;
@@ -227,19 +225,115 @@
       gap: 10px;
     }
 
+    /* HOBBY TAG - có thể click */
     .hobby-tag {
       padding: 8px 18px;
       border-radius: 100px;
       font-size: 13px;
       border: 1px solid;
       transition: all 0.3s;
-      cursor: default;
+      cursor: pointer;
+      position: relative;
     }
 
     .profile.phong .hobby-tag { border-color: var(--accent-blue); color: var(--accent-blue); }
     .profile.phong .hobby-tag:hover { background: var(--accent-blue); color: white; }
     .profile.nhi .hobby-tag { border-color: var(--accent-pink); color: var(--accent-pink); }
     .profile.nhi .hobby-tag:hover { background: var(--accent-pink); color: white; }
+
+    /* POPUP OVERLAY */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(4px);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .popup-overlay.active {
+      display: flex;
+    }
+
+    .popup-box {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 420px;
+      width: 90%;
+      position: relative;
+      animation: popUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 16px; right: 20px;
+      font-size: 22px;
+      cursor: pointer;
+      color: var(--gray);
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+
+    .popup-close:hover { color: var(--black); }
+
+    .popup-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .popup-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .popup-owner {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .popup-box.blue .popup-owner { color: var(--accent-blue); }
+    .popup-box.pink .popup-owner { color: var(--accent-pink); }
+
+    .popup-divider {
+      height: 1px;
+      background: var(--light);
+      margin-bottom: 20px;
+    }
+
+    .popup-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .popup-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    .popup-list li::before {
+      content: '▸';
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .popup-box.blue .popup-list li::before { color: var(--accent-blue); }
+    .popup-box.pink .popup-list li::before { color: var(--accent-pink); }
 
     footer {
       background: var(--black);
@@ -258,6 +352,16 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes popUp {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
     @media (max-width: 768px) {
       nav { padding: 18px 20px; }
       .nav-links { display: none; }
@@ -270,7 +374,9 @@
 <body>
 
   <nav>
-    <a href="#" style="text-decoration:none; color:inherit;"><div class="logo">LĐP & NNQN</div></a>
+    <a href="#" style="text-decoration:none; color:inherit;">
+      <div class="logo">LĐP & NNQN</div>
+    </a>
     <ul class="nav-links">
       <li><a href="#phong">Đức Phong</a></li>
       <li><a href="#nhi">Quỳnh Nhi</a></li>
@@ -293,38 +399,27 @@
 
       <div class="photo-wrap">
         <div class="photo-frame">
-          <!-- Avatar Nam -->
           <svg class="avatar-svg" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Body / Áo -->
             <rect x="40" y="185" width="140" height="110" rx="20" fill="#4a90c4"/>
             <rect x="55" y="185" width="45" height="60" rx="6" fill="#3a7ab0"/>
             <rect x="120" y="185" width="45" height="60" rx="6" fill="#3a7ab0"/>
-            <!-- Cổ áo -->
             <path d="M85 185 L110 215 L135 185" stroke="white" stroke-width="3" fill="none"/>
-            <!-- Cổ -->
             <rect x="93" y="155" width="34" height="36" rx="10" fill="#f5cba7"/>
-            <!-- Đầu -->
             <ellipse cx="110" cy="130" rx="48" ry="52" fill="#f5cba7"/>
-            <!-- Tóc -->
             <ellipse cx="110" cy="88" rx="48" ry="24" fill="#3d2b1f"/>
             <rect x="62" y="88" width="96" height="28" rx="4" fill="#3d2b1f"/>
             <rect x="62" y="100" width="14" height="38" rx="7" fill="#3d2b1f"/>
             <rect x="144" y="100" width="14" height="38" rx="7" fill="#3d2b1f"/>
-            <!-- Mắt -->
             <ellipse cx="93" cy="130" rx="7" ry="7.5" fill="white"/>
             <ellipse cx="127" cy="130" rx="7" ry="7.5" fill="white"/>
             <ellipse cx="94" cy="131" rx="4" ry="4.5" fill="#3d2b1f"/>
             <ellipse cx="128" cy="131" rx="4" ry="4.5" fill="#3d2b1f"/>
             <ellipse cx="95" cy="130" rx="1.5" ry="1.5" fill="white"/>
             <ellipse cx="129" cy="130" rx="1.5" ry="1.5" fill="white"/>
-            <!-- Lông mày -->
             <path d="M84 120 Q93 116 102 120" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round" fill="none"/>
             <path d="M118 120 Q127 116 136 120" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- Mũi -->
             <ellipse cx="110" cy="143" rx="4" ry="3" fill="#e8a882"/>
-            <!-- Miệng -->
             <path d="M99 155 Q110 163 121 155" stroke="#c0756a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- Tai -->
             <ellipse cx="62" cy="132" rx="8" ry="10" fill="#f5cba7"/>
             <ellipse cx="158" cy="132" rx="8" ry="10" fill="#f5cba7"/>
           </svg>
@@ -352,11 +447,11 @@
         </div>
       </div>
 
-      <p class="hobbies-title">Sở thích</p>
+      <p class="hobbies-title">Sở thích — click để xem chi tiết 👆</p>
       <div class="hobbies-list">
-        <span class="hobby-tag">🎮 Chơi Game</span>
-        <span class="hobby-tag">⚽ Thể thao</span>
-        <span class="hobby-tag">📚 Đọc sách</span>
+        <span class="hobby-tag" onclick="openPopup('game-phong')">🎮 Chơi Game</span>
+        <span class="hobby-tag" onclick="openPopup('thethao-phong')">⚽ Thể thao</span>
+        <span class="hobby-tag" onclick="openPopup('sach-phong')">📚 Đọc sách</span>
       </div>
     </div>
 
@@ -368,46 +463,31 @@
 
       <div class="photo-wrap">
         <div class="photo-frame">
-          <!-- Avatar Nữ -->
           <svg class="avatar-svg" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Váy / Thân -->
             <path d="M55 190 Q55 170 110 168 Q165 170 165 190 L175 295 H45 Z" fill="#d45e96"/>
-            <path d="M80 168 Q110 210 140 168" fill="#e8a0c4" />
-            <!-- Cổ áo -->
+            <path d="M80 168 Q110 210 140 168" fill="#e8a0c4"/>
             <ellipse cx="110" cy="168" rx="22" ry="8" fill="#e8a0c4"/>
-            <!-- Cổ -->
             <rect x="96" y="148" width="28" height="28" rx="10" fill="#f5cba7"/>
-            <!-- Đầu -->
             <ellipse cx="110" cy="122" rx="46" ry="50" fill="#f5cba7"/>
-            <!-- Tóc dài -->
             <ellipse cx="110" cy="82" rx="46" ry="22" fill="#2c1810"/>
             <rect x="64" y="82" width="92" height="22" rx="4" fill="#2c1810"/>
-            <!-- Tóc hai bên dài -->
             <path d="M64 95 Q50 130 54 190" stroke="#2c1810" stroke-width="22" stroke-linecap="round" fill="none"/>
             <path d="M156 95 Q170 130 166 190" stroke="#2c1810" stroke-width="22" stroke-linecap="round" fill="none"/>
-            <!-- Mái tóc trước -->
             <path d="M70 90 Q90 108 110 100 Q130 108 150 90" fill="#2c1810"/>
-            <!-- Mắt -->
             <ellipse cx="93" cy="122" rx="7" ry="8" fill="white"/>
             <ellipse cx="127" cy="122" rx="7" ry="8" fill="white"/>
             <ellipse cx="93" cy="123" rx="4.5" ry="5" fill="#2c1810"/>
             <ellipse cx="127" cy="123" rx="4.5" ry="5" fill="#2c1810"/>
             <ellipse cx="94.5" cy="122" rx="1.5" ry="1.5" fill="white"/>
             <ellipse cx="128.5" cy="122" rx="1.5" ry="1.5" fill="white"/>
-            <!-- Lông mày cong -->
             <path d="M83 111 Q93 107 103 111" stroke="#2c1810" stroke-width="2" stroke-linecap="round" fill="none"/>
             <path d="M117 111 Q127 107 137 111" stroke="#2c1810" stroke-width="2" stroke-linecap="round" fill="none"/>
-            <!-- Má hồng -->
             <ellipse cx="82" cy="132" rx="10" ry="6" fill="#f0a0b8" opacity="0.5"/>
             <ellipse cx="138" cy="132" rx="10" ry="6" fill="#f0a0b8" opacity="0.5"/>
-            <!-- Mũi -->
             <ellipse cx="110" cy="134" rx="3.5" ry="2.5" fill="#e8a882"/>
-            <!-- Miệng cười -->
             <path d="M100 146 Q110 155 120 146" stroke="#d45e96" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-            <!-- Tai -->
             <ellipse cx="64" cy="124" rx="7" ry="9" fill="#f5cba7"/>
             <ellipse cx="156" cy="124" rx="7" ry="9" fill="#f5cba7"/>
-            <!-- Bông tai -->
             <circle cx="64" cy="134" r="4" fill="#d45e96"/>
             <circle cx="156" cy="134" r="4" fill="#d45e96"/>
           </svg>
@@ -435,10 +515,10 @@
         </div>
       </div>
 
-      <p class="hobbies-title">Sở thích</p>
+      <p class="hobbies-title">Sở thích — click để xem chi tiết 👆</p>
       <div class="hobbies-list">
-        <span class="hobby-tag">📖 Đọc sách</span>
-        <span class="hobby-tag">🛍️ Mua đồ</span>
+        <span class="hobby-tag" onclick="openPopup('sach-nhi')">📖 Đọc sách</span>
+        <span class="hobby-tag" onclick="openPopup('muado-nhi')">🛍️ Mua đồ</span>
       </div>
     </div>
 
@@ -447,6 +527,115 @@
   <footer>
     <p>Được tạo bởi <span class="blue">Lê Đức Phong</span> & <span class="pink">Nguyễn Ngọc Quỳnh Nhi</span> &mdash; 2026</p>
   </footer>
+
+  <!-- ===== POPUPS ===== -->
+
+  <!-- Phong: Game -->
+  <div class="popup-overlay" id="popup-game-phong" onclick="closePopup('game-phong')">
+    <div class="popup-box blue" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup('game-phong')">✕</button>
+      <span class="popup-icon">🎮</span>
+      <div class="popup-title">Chơi Game</div>
+      <div class="popup-owner">Lê Đức Phong</div>
+      <div class="popup-divider"></div>
+      <ul class="popup-list">
+        <li>Thích chơi game sau những giờ học căng thẳng để thư giãn</li>
+        <li>Yêu thích thể loại game hành động và thể thao</li>
+        <li>Hay chơi cùng bạn bè vào buổi tối và cuối tuần</li>
+        <li>Game giúp rèn luyện phản xạ và tư duy nhanh nhạy</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Phong: Thể thao -->
+  <div class="popup-overlay" id="popup-thethao-phong" onclick="closePopup('thethao-phong')">
+    <div class="popup-box blue" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup('thethao-phong')">✕</button>
+      <span class="popup-icon">⚽</span>
+      <div class="popup-title">Thể thao</div>
+      <div class="popup-owner">Lê Đức Phong</div>
+      <div class="popup-divider"></div>
+      <ul class="popup-list">
+        <li>Đam mê bóng đá, thường xuyên đá bóng cùng bạn bè</li>
+        <li>Thể thao giúp cơ thể khỏe mạnh và tinh thần sảng khoái</li>
+        <li>Yêu thích tinh thần đồng đội và sự cạnh tranh lành mạnh</li>
+        <li>Tập thể dục đều đặn để duy trì sức khỏe tốt</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Phong: Đọc sách -->
+  <div class="popup-overlay" id="popup-sach-phong" onclick="closePopup('sach-phong')">
+    <div class="popup-box blue" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup('sach-phong')">✕</button>
+      <span class="popup-icon">📚</span>
+      <div class="popup-title">Đọc sách</div>
+      <div class="popup-owner">Lê Đức Phong</div>
+      <div class="popup-divider"></div>
+      <ul class="popup-list">
+        <li>Thích đọc sách để mở mang kiến thức và tư duy</li>
+        <li>Yêu thích thể loại sách kỹ năng sống và khám phá</li>
+        <li>Đọc sách giúp tăng khả năng tập trung và tưởng tượng</li>
+        <li>Mỗi cuốn sách là một cuộc hành trình mới thú vị</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Nhi: Đọc sách -->
+  <div class="popup-overlay" id="popup-sach-nhi" onclick="closePopup('sach-nhi')">
+    <div class="popup-box pink" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup('sach-nhi')">✕</button>
+      <span class="popup-icon">📖</span>
+      <div class="popup-title">Đọc sách</div>
+      <div class="popup-owner">Nguyễn Ngọc Quỳnh Nhi</div>
+      <div class="popup-divider"></div>
+      <ul class="popup-list">
+        <li>Đọc sách là cách tuyệt vời để thư giãn khi ở một mình</li>
+        <li>Yêu thích tiểu thuyết lãng mạn và truyện ngôn tình</li>
+        <li>Sách giúp mình hiểu hơn về cảm xúc và con người</li>
+        <li>Có thể đọc hàng giờ mà không cảm thấy chán</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Nhi: Mua đồ -->
+  <div class="popup-overlay" id="popup-muado-nhi" onclick="closePopup('muado-nhi')">
+    <div class="popup-box pink" onclick="event.stopPropagation()">
+      <button class="popup-close" onclick="closePopup('muado-nhi')">✕</button>
+      <span class="popup-icon">🛍️</span>
+      <div class="popup-title">Mua đồ</div>
+      <div class="popup-owner">Nguyễn Ngọc Quỳnh Nhi</div>
+      <div class="popup-divider"></div>
+      <ul class="popup-list">
+        <li>Thích khám phá các shop thời trang và phụ kiện dễ thương</li>
+        <li>Mua sắm là cách giải tỏa stress sau những ngày học mệt mỏi</li>
+        <li>Hay đi mua đồ cùng bạn bè vào cuối tuần</li>
+        <li>Luôn tìm được những món đồ độc đáo với giá hợp lý</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function openPopup(id) {
+      document.getElementById('popup-' + id).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup(id) {
+      document.getElementById('popup-' + id).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Đóng popup bằng phím ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.popup-overlay.active').forEach(function(el) {
+          el.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
