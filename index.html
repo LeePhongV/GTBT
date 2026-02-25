@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lê Đức Phong</title>
+  <title>Lê Đức Phong & Nguyễn Ngọc Quỳnh Nhi</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
       --black: #0a0a0a;
       --white: #f5f5f0;
       --gray: #888;
-      --accent: #c8a96e;
+      --accent-blue: #6e9fc8;
+      --accent-pink: #c86e9f;
       --light: #e8e8e3;
     }
 
@@ -20,41 +21,38 @@
       background: var(--white);
       color: var(--black);
       font-family: 'DM Sans', sans-serif;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* NAV */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      padding: 24px 60px;
+      padding: 20px 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      background: rgba(245,245,240,0.9);
-      backdrop-filter: blur(10px);
+      background: rgba(245,245,240,0.92);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--light);
     }
 
     .logo {
       font-family: 'Playfair Display', serif;
-      font-size: 20px;
+      font-size: 18px;
       letter-spacing: 2px;
-      color: var(--black);
     }
 
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 36px;
       list-style: none;
     }
 
     .nav-links a {
       text-decoration: none;
       color: var(--gray);
-      font-size: 13px;
+      font-size: 12px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
       transition: color 0.3s;
@@ -62,365 +60,280 @@
 
     .nav-links a:hover { color: var(--black); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding-top: 80px;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 80px 60px;
+    .page-title {
+      text-align: center;
+      padding: 140px 60px 60px;
       animation: fadeUp 0.8s ease forwards;
     }
 
-    .hero-tag {
+    .page-title p {
+      font-size: 11px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .page-title h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 60px);
+      line-height: 1.2;
+    }
+
+    .page-title h1 .blue { color: var(--accent-blue); }
+    .page-title h1 .pink { color: var(--accent-pink); }
+
+    .title-divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(to right, var(--accent-blue), var(--accent-pink));
+      margin: 24px auto 0;
+    }
+
+    .profiles {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: #ddd;
+    }
+
+    .profile {
+      background: var(--white);
+      padding: 80px 60px;
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .profile:nth-child(2) { animation-delay: 0.2s; }
+
+    .profile-tag {
       font-size: 11px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(48px, 6vw, 80px);
-      line-height: 1.05;
-      margin-bottom: 24px;
-      color: var(--black);
-    }
-
-    .hero-name span {
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #555;
-      max-width: 420px;
-      margin-bottom: 48px;
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 48px;
-    }
-
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      color: var(--black);
-    }
-
-    .stat-label {
-      font-size: 12px;
-      color: var(--gray);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-top: 4px;
-    }
-
-    /* PHOTO */
-    .hero-right {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 60px;
-      animation: fadeIn 1s ease 0.3s both;
-    }
-
-    .photo-frame {
-      width: 340px;
-      height: 420px;
-      border-radius: 4px;
-      background: var(--light);
-      position: relative;
-      overflow: hidden;
-      box-shadow: 20px 20px 60px rgba(0,0,0,0.12);
-    }
-
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      color: var(--gray);
-    }
-
-    .photo-placeholder .icon {
-      width: 64px;
-      height: 64px;
-      border: 2px dashed #ccc;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-    }
-
-    .photo-placeholder p {
-      font-size: 13px;
-      color: #aaa;
-      letter-spacing: 0.5px;
-    }
-
-    .photo-badge {
-      position: absolute;
-      bottom: -16px;
-      right: -16px;
-      background: var(--black);
-      color: var(--white);
-      padding: 16px 24px;
-      border-radius: 4px;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .photo-line {
-      position: absolute;
-      top: -20px;
-      left: -20px;
-      width: 80px;
-      height: 80px;
-      border-top: 2px solid var(--accent);
-      border-left: 2px solid var(--accent);
-    }
-
-    /* SECTION */
-    section {
-      padding: 100px 60px;
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 60px;
-    }
-
-    .section-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 60px;
-      color: var(--light);
-      line-height: 1;
-      user-select: none;
-    }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 36px;
-      color: var(--black);
-    }
-
-    /* ABOUT */
-    .about {
-      background: var(--black);
-      color: var(--white);
-    }
-
-    .about .section-num { color: #1a1a1a; }
-    .about .section-title { color: var(--white); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-text p {
-      font-size: 16px;
-      line-height: 1.9;
-      color: #aaa;
       margin-bottom: 20px;
     }
 
-    .about-text p strong {
-      color: var(--accent);
-      font-weight: 500;
+    .profile.phong .profile-tag { color: var(--accent-blue); }
+    .profile.nhi .profile-tag { color: var(--accent-pink); }
+
+    .profile-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
-    .about-info {
+    .profile.phong .profile-name span { color: var(--accent-blue); }
+    .profile.nhi .profile-name span { color: var(--accent-pink); }
+
+    .profile-desc {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #555;
+      max-width: 380px;
+      margin-bottom: 40px;
+    }
+
+    .photo-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 40px;
+    }
+
+    .photo-frame {
+      width: 260px;
+      height: 320px;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 16px 16px 48px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .profile.phong .photo-frame {
+      background: linear-gradient(160deg, #d6eaf8 0%, #aed6f1 60%, #6e9fc8 100%);
+    }
+
+    .profile.nhi .photo-frame {
+      background: linear-gradient(160deg, #fde8f3 0%, #f5b7d8 60%, #c86e9f 100%);
+    }
+
+    .avatar-svg {
+      width: 220px;
+      height: 280px;
+    }
+
+    .photo-corner {
+      position: absolute;
+      top: -14px; left: -14px;
+      width: 50px; height: 50px;
+      border-top: 2px solid;
+      border-left: 2px solid;
+      border-radius: 2px;
+    }
+
+    .profile.phong .photo-corner { border-color: var(--accent-blue); }
+    .profile.nhi .photo-corner { border-color: var(--accent-pink); }
+
+    .photo-badge {
+      position: absolute;
+      bottom: -10px; right: -10px;
+      background: var(--black);
+      color: var(--white);
+      padding: 10px 18px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+
+    .info-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 20px;
+      margin-bottom: 40px;
     }
 
     .info-item {
-      border-left: 2px solid var(--accent);
-      padding-left: 16px;
+      padding-left: 14px;
+      border-left: 2px solid;
     }
 
+    .profile.phong .info-item { border-color: var(--accent-blue); }
+    .profile.nhi .info-item { border-color: var(--accent-pink); }
+
     .info-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 4px;
+    }
+
+    .info-value { font-size: 15px; color: var(--black); }
+
+    .hobbies-title {
       font-size: 11px;
       letter-spacing: 2px;
       text-transform: uppercase;
       color: var(--gray);
-      margin-bottom: 6px;
+      margin-bottom: 16px;
     }
 
-    .info-value {
-      font-size: 16px;
-      color: var(--white);
+    .hobbies-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    /* HOBBIES */
-    .hobbies-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    .hobby-card {
-      background: var(--light);
-      padding: 48px 36px;
-      transition: background 0.3s;
+    .hobby-tag {
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px;
+      border: 1px solid;
+      transition: all 0.3s;
       cursor: default;
-      position: relative;
-      overflow: hidden;
     }
 
-    .hobby-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--accent);
-      transition: width 0.4s ease;
-    }
+    .profile.phong .hobby-tag { border-color: var(--accent-blue); color: var(--accent-blue); }
+    .profile.phong .hobby-tag:hover { background: var(--accent-blue); color: white; }
+    .profile.nhi .hobby-tag { border-color: var(--accent-pink); color: var(--accent-pink); }
+    .profile.nhi .hobby-tag:hover { background: var(--accent-pink); color: white; }
 
-    .hobby-card:hover::after { width: 100%; }
-    .hobby-card:hover { background: #e0e0db; }
-
-    .hobby-icon {
-      font-size: 40px;
-      margin-bottom: 20px;
-      display: block;
-    }
-
-    .hobby-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .hobby-desc {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.7;
-    }
-
-    /* FOOTER */
     footer {
       background: var(--black);
-      color: var(--white);
-      text-align: center;
-      padding: 40px;
-      font-size: 13px;
       color: var(--gray);
+      text-align: center;
+      padding: 36px;
+      font-size: 12px;
       letter-spacing: 1px;
     }
 
-    footer span { color: var(--accent); }
+    footer .blue { color: var(--accent-blue); }
+    footer .pink { color: var(--accent-pink); }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(30px); }
+      from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    /* RESPONSIVE */
     @media (max-width: 768px) {
-      nav { padding: 20px 24px; }
+      nav { padding: 18px 20px; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 40px 24px; }
-      .hero-right { padding: 40px 24px; }
-      .photo-frame { width: 260px; height: 320px; }
-      section { padding: 60px 24px; }
-      .about-grid { grid-template-columns: 1fr; }
-      .hobbies-grid { grid-template-columns: 1fr; }
+      .page-title { padding: 120px 24px 40px; }
+      .profiles { grid-template-columns: 1fr; }
+      .profile { padding: 60px 24px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <div class="logo">LĐP</div>
+    <div class="logo">LĐP & NNQN</div>
     <ul class="nav-links">
-      <li><a href="#about">Giới thiệu</a></li>
-      <li><a href="#hobbies">Sở thích</a></li>
+      <li><a href="#phong">Đức Phong</a></li>
+      <li><a href="#nhi">Quỳnh Nhi</a></li>
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-left">
-      <p class="hero-tag">Xin chào, tôi là</p>
-      <h1 class="hero-name">Lê Đức<br><span>Phong</span></h1>
-      <p class="hero-desc">Học sinh năng động, hòa đồng và luôn tràn đầy năng lượng. Tôi yêu thích khám phá những điều mới mẻ trong cuộc sống.</p>
-      <div class="hero-stats">
-        <div>
-          <div class="stat-num">17</div>
-          <div class="stat-label">Tuổi</div>
-        </div>
-        <div>
-          <div class="stat-num">3+</div>
-          <div class="stat-label">Sở thích</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-right">
-      <div class="photo-frame">
-        <!-- ĐỂ THÊM ẢNH: thay dòng dưới bằng <img src="ten-anh-cua-ban.jpg" alt="Lê Đức Phong"> -->
-        <div class="photo-placeholder">
-          <div class="icon">📷</div>
-          <p>Thêm ảnh của bạn vào đây</p>
-          <p style="font-size:11px; color:#bbb;">src="ten-anh.jpg"</p>
-        </div>
-        <div class="photo-line"></div>
-        <div class="photo-badge">Học sinh</div>
-      </div>
-    </div>
+  <div class="page-title">
+    <p>Giới thiệu về chúng tôi</p>
+    <h1><span class="blue">Đức Phong</span> & <span class="pink">Quỳnh Nhi</span></h1>
+    <div class="title-divider"></div>
   </div>
 
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">Giới thiệu bản thân</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-text">
-        <p>Xin chào! Tôi là <strong>Lê Đức Phong</strong>, một học sinh 17 tuổi với tính cách <strong>hòa đồng và vui vẻ</strong>.</p>
-        <p>Tôi luôn cố gắng học hỏi những điều mới, kết bạn với nhiều người và tận hưởng từng khoảnh khắc trong cuộc sống.</p>
-        <p>Với sự nhiệt tình và tinh thần cởi mở, tôi tin rằng mình sẽ không ngừng phát triển và đạt được những mục tiêu đề ra.</p>
+  <div class="profiles">
+
+    <!-- PHONG -->
+    <div class="profile phong" id="phong">
+      <p class="profile-tag">Xin chào, tôi là</p>
+      <h2 class="profile-name">Lê Đức<br><span>Phong</span></h2>
+      <p class="profile-desc">Học sinh năng động, hòa đồng và luôn tràn đầy năng lượng. Tôi yêu thích khám phá những điều mới mẻ trong cuộc sống.</p>
+
+      <div class="photo-wrap">
+        <div class="photo-frame">
+          <!-- Avatar Nam -->
+          <svg class="avatar-svg" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Body / Áo -->
+            <rect x="40" y="185" width="140" height="110" rx="20" fill="#4a90c4"/>
+            <rect x="55" y="185" width="45" height="60" rx="6" fill="#3a7ab0"/>
+            <rect x="120" y="185" width="45" height="60" rx="6" fill="#3a7ab0"/>
+            <!-- Cổ áo -->
+            <path d="M85 185 L110 215 L135 185" stroke="white" stroke-width="3" fill="none"/>
+            <!-- Cổ -->
+            <rect x="93" y="155" width="34" height="36" rx="10" fill="#f5cba7"/>
+            <!-- Đầu -->
+            <ellipse cx="110" cy="130" rx="48" ry="52" fill="#f5cba7"/>
+            <!-- Tóc -->
+            <ellipse cx="110" cy="88" rx="48" ry="24" fill="#3d2b1f"/>
+            <rect x="62" y="88" width="96" height="28" rx="4" fill="#3d2b1f"/>
+            <rect x="62" y="100" width="14" height="38" rx="7" fill="#3d2b1f"/>
+            <rect x="144" y="100" width="14" height="38" rx="7" fill="#3d2b1f"/>
+            <!-- Mắt -->
+            <ellipse cx="93" cy="130" rx="7" ry="7.5" fill="white"/>
+            <ellipse cx="127" cy="130" rx="7" ry="7.5" fill="white"/>
+            <ellipse cx="94" cy="131" rx="4" ry="4.5" fill="#3d2b1f"/>
+            <ellipse cx="128" cy="131" rx="4" ry="4.5" fill="#3d2b1f"/>
+            <ellipse cx="95" cy="130" rx="1.5" ry="1.5" fill="white"/>
+            <ellipse cx="129" cy="130" rx="1.5" ry="1.5" fill="white"/>
+            <!-- Lông mày -->
+            <path d="M84 120 Q93 116 102 120" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M118 120 Q127 116 136 120" stroke="#3d2b1f" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Mũi -->
+            <ellipse cx="110" cy="143" rx="4" ry="3" fill="#e8a882"/>
+            <!-- Miệng -->
+            <path d="M99 155 Q110 163 121 155" stroke="#c0756a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Tai -->
+            <ellipse cx="62" cy="132" rx="8" ry="10" fill="#f5cba7"/>
+            <ellipse cx="158" cy="132" rx="8" ry="10" fill="#f5cba7"/>
+          </svg>
+        </div>
+        <div class="photo-corner"></div>
+        <div class="photo-badge">Đức Phong</div>
       </div>
-      <div class="about-info">
+
+      <div class="info-grid">
         <div class="info-item">
           <div class="info-label">Họ và tên</div>
           <div class="info-value">Lê Đức Phong</div>
@@ -438,37 +351,101 @@
           <div class="info-value">Hòa đồng, vui vẻ</div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- HOBBIES -->
-  <section id="hobbies">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">Sở thích</h2>
-    </div>
-    <div class="hobbies-grid">
-      <div class="hobby-card">
-        <span class="hobby-icon">🎮</span>
-        <div class="hobby-name">Chơi Game</div>
-        <p class="hobby-desc">Đam mê thế giới game, nơi tôi có thể thư giãn và kết nối với bạn bè sau những giờ học căng thẳng.</p>
-      </div>
-      <div class="hobby-card">
-        <span class="hobby-icon">⚽</span>
-        <div class="hobby-name">Thể thao</div>
-        <p class="hobby-desc">Thể thao giúp tôi rèn luyện sức khỏe, tinh thần đồng đội và luôn tràn đầy năng lượng mỗi ngày.</p>
-      </div>
-      <div class="hobby-card">
-        <span class="hobby-icon">📚</span>
-        <div class="hobby-name">Đọc sách</div>
-        <p class="hobby-desc">Đọc sách mở ra những thế giới mới, giúp tôi học hỏi và mở rộng kiến thức về mọi lĩnh vực trong cuộc sống.</p>
+      <p class="hobbies-title">Sở thích</p>
+      <div class="hobbies-list">
+        <span class="hobby-tag">🎮 Chơi Game</span>
+        <span class="hobby-tag">⚽ Thể thao</span>
+        <span class="hobby-tag">📚 Đọc sách</span>
       </div>
     </div>
-  </section>
 
-  <!-- FOOTER -->
+    <!-- NHI -->
+    <div class="profile nhi" id="nhi">
+      <p class="profile-tag">Xin chào, tôi là</p>
+      <h2 class="profile-name">Nguyễn Ngọc<br><span>Quỳnh Nhi</span></h2>
+      <p class="profile-desc">Cô gái hướng nội, vui vẻ và luôn tìm thấy niềm vui trong những điều nhỏ bé. Tôi thích không gian yên tĩnh để sáng tạo và thư giãn.</p>
+
+      <div class="photo-wrap">
+        <div class="photo-frame">
+          <!-- Avatar Nữ -->
+          <svg class="avatar-svg" viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Váy / Thân -->
+            <path d="M55 190 Q55 170 110 168 Q165 170 165 190 L175 295 H45 Z" fill="#d45e96"/>
+            <path d="M80 168 Q110 210 140 168" fill="#e8a0c4" />
+            <!-- Cổ áo -->
+            <ellipse cx="110" cy="168" rx="22" ry="8" fill="#e8a0c4"/>
+            <!-- Cổ -->
+            <rect x="96" y="148" width="28" height="28" rx="10" fill="#f5cba7"/>
+            <!-- Đầu -->
+            <ellipse cx="110" cy="122" rx="46" ry="50" fill="#f5cba7"/>
+            <!-- Tóc dài -->
+            <ellipse cx="110" cy="82" rx="46" ry="22" fill="#2c1810"/>
+            <rect x="64" y="82" width="92" height="22" rx="4" fill="#2c1810"/>
+            <!-- Tóc hai bên dài -->
+            <path d="M64 95 Q50 130 54 190" stroke="#2c1810" stroke-width="22" stroke-linecap="round" fill="none"/>
+            <path d="M156 95 Q170 130 166 190" stroke="#2c1810" stroke-width="22" stroke-linecap="round" fill="none"/>
+            <!-- Mái tóc trước -->
+            <path d="M70 90 Q90 108 110 100 Q130 108 150 90" fill="#2c1810"/>
+            <!-- Mắt -->
+            <ellipse cx="93" cy="122" rx="7" ry="8" fill="white"/>
+            <ellipse cx="127" cy="122" rx="7" ry="8" fill="white"/>
+            <ellipse cx="93" cy="123" rx="4.5" ry="5" fill="#2c1810"/>
+            <ellipse cx="127" cy="123" rx="4.5" ry="5" fill="#2c1810"/>
+            <ellipse cx="94.5" cy="122" rx="1.5" ry="1.5" fill="white"/>
+            <ellipse cx="128.5" cy="122" rx="1.5" ry="1.5" fill="white"/>
+            <!-- Lông mày cong -->
+            <path d="M83 111 Q93 107 103 111" stroke="#2c1810" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M117 111 Q127 107 137 111" stroke="#2c1810" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <!-- Má hồng -->
+            <ellipse cx="82" cy="132" rx="10" ry="6" fill="#f0a0b8" opacity="0.5"/>
+            <ellipse cx="138" cy="132" rx="10" ry="6" fill="#f0a0b8" opacity="0.5"/>
+            <!-- Mũi -->
+            <ellipse cx="110" cy="134" rx="3.5" ry="2.5" fill="#e8a882"/>
+            <!-- Miệng cười -->
+            <path d="M100 146 Q110 155 120 146" stroke="#d45e96" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <!-- Tai -->
+            <ellipse cx="64" cy="124" rx="7" ry="9" fill="#f5cba7"/>
+            <ellipse cx="156" cy="124" rx="7" ry="9" fill="#f5cba7"/>
+            <!-- Bông tai -->
+            <circle cx="64" cy="134" r="4" fill="#d45e96"/>
+            <circle cx="156" cy="134" r="4" fill="#d45e96"/>
+          </svg>
+        </div>
+        <div class="photo-corner"></div>
+        <div class="photo-badge">Quỳnh Nhi</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Họ và tên</div>
+          <div class="info-value">Nguyễn Ngọc Quỳnh Nhi</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Tuổi</div>
+          <div class="info-value">17 tuổi</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Nghề nghiệp</div>
+          <div class="info-value">Học sinh</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Tính cách</div>
+          <div class="info-value">Hướng nội, vui vẻ</div>
+        </div>
+      </div>
+
+      <p class="hobbies-title">Sở thích</p>
+      <div class="hobbies-list">
+        <span class="hobby-tag">📖 Đọc sách</span>
+        <span class="hobby-tag">🛍️ Mua đồ</span>
+      </div>
+    </div>
+
+  </div>
+
   <footer>
-    <p>Được tạo bởi <span>Lê Đức Phong</span> &mdash; 2026</p>
+    <p>Được tạo bởi <span class="blue">Lê Đức Phong</span> & <span class="pink">Nguyễn Ngọc Quỳnh Nhi</span> &mdash; 2026</p>
   </footer>
 
 </body>
